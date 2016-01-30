@@ -18,6 +18,6 @@ catkin_package()
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} "src")
 
-add_executable(search_contours src/contour_search.cpp)
+add_executable(gate_search src/gate_search.cpp)
 
-target_link_libraries(search_contours ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(gate_search ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
