@@ -13,7 +13,6 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   actionlib
   move_base_msgs
-
 )
 
 find_package(OpenCV 2.4.8 EXACT REQUIRED)
