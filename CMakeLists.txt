@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   sensor_msgs
+  geometry_msgs
   cv_bridge
   image_transport
   actionlib
@@ -22,6 +23,8 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} "src")
 
 add_executable(find_gate src/gate_search.cpp)
 add_executable(turtlebot_drive src/turtlebot_drive.cpp)
+add_executable(turtlebot_cmd_vel src/turtlebot_cmd_vel.cpp)
 
 target_link_libraries(find_gate ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 target_link_libraries(turtlebot_drive ${catkin_LIBRARIES})
+target_link_libraries(turtlebot_cmd_vel ${catkin_LIBRARIES})
