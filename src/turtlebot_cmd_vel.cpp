@@ -19,7 +19,10 @@ public:
     laser_sub = nh_.subscribe("/scan", 1, &TurtlebotCmdVel::laserCb, this);
     move_pub = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
   }
-  
+  /* Callback function for the /targetPos topic
+     Attempts to move or turn the robot based on
+     the vector received from image calculations
+   */
   void vectorCb(const geometry_msgs::Vector3& msg)
   {
     geometry_msgs::Twist moveCommand;
@@ -34,6 +37,10 @@ public:
     ROS_INFO("MOVING");
   }
 
+  /* Callback function for the /scan topic
+     Attempts to stop the robot if the laser
+     scanner detects an obstacle
+   */
   void laserCb(const sensor_msgs::LaserScan& msg)
   {
     int numRanges = (int)(msg.angle_max - msg.angle_min) / msg.angle_increment;
@@ -50,6 +57,7 @@ public:
 	  moveCommand.angular.z = 0;
 	}
       }
+    move_pub.publish(moveCommand);
   }
 };
 
