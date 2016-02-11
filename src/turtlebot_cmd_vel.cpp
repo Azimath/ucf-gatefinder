@@ -16,8 +16,8 @@ public:
   TurtlebotCmdVel()
   {
     vector_sub = nh_.subscribe("/targetPos", 1, &TurtlebotCmdVel::vectorCb, this);
-    laser_sub = nh_.subscribe("/scan", 1, &TurtlebotCmdVel::laserCb, this);
-    move_pub = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+ //   laser_sub = nh_.subscribe("/scan", 1, &TurtlebotCmdVel::laserCb, this);
+    move_pub = nh_.advertise<geometry_msgs::Twist>("cmd_vel_mux/input/navi", 1000);
   }
   /* Callback function for the /targetPos topic
      Attempts to move or turn the robot based on
@@ -26,13 +26,13 @@ public:
   void vectorCb(const geometry_msgs::Vector3& msg)
   {
     geometry_msgs::Twist moveCommand;
-    if(msg.x > 0.05){
-      moveCommand.angular.z = 0.2;
+    if(msg.x > 15){
+      moveCommand.angular.z = -1;
     ROS_INFO("MOVING");
-    }if(msg.x < -0.05){
-      moveCommand.angular.z = -0.2;
+    }if(msg.x < -15){
+      moveCommand.angular.z = 1;
     ROS_INFO("MOVING2");
-    }if(msg.x <= 0.05 && msg.x >= -0.05){
+    }if(msg.x <= 15 && msg.x >= -15){
       moveCommand.linear.x = 0.2;
     ROS_INFO("MOVING");
     }
@@ -43,7 +43,7 @@ public:
      Attempts to stop the robot if the laser
      scanner detects an obstacle
    */
-  void laserCb(const sensor_msgs::LaserScan& msg)
+/*  void laserCb(const sensor_msgs::LaserScan& msg)
   {
     int numRanges = (int)(msg.angle_max - msg.angle_min) / msg.angle_increment;
     int minRange = 0.75;
@@ -62,6 +62,7 @@ public:
       }
     move_pub.publish(moveCommand);
   }
+*/
 };
 
   int main(int argc, char** argv)
