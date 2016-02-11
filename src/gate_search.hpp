@@ -23,7 +23,7 @@ public:
     ros::Publisher target_pub;
 
     int iLowH = 0;
-    int iHighH = 255;
+    int iHighH = 179;
 
     int iLowS = 0;
     int iHighS = 255;
