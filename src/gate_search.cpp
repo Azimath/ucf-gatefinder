@@ -87,6 +87,8 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
         targetData.z = (double)bounds.width/(double)bounds.height;
 
         target_pub.publish(targetData);
+        cv::imshow(OPENCV_WINDOW, drawing); //display the incoming image to the user
+        cv::waitKey(3);
     }
     catch (cv::Exception &e)
     {
@@ -95,8 +97,7 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
 
     //cv::Mat drawing
 
-    cv::imshow(OPENCV_WINDOW, drawing); //display the incoming image to the user
-    cv::waitKey(3);
+
 
     image_pub_.publish(cv_ptr->toImageMsg());
 }
