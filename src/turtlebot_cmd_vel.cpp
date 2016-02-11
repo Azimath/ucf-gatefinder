@@ -27,14 +27,16 @@ public:
   {
     geometry_msgs::Twist moveCommand;
     if(msg.x > 0.05){
-      moveCommand.angular.x = 0.2;
+      moveCommand.angular.z = 0.2;
+    ROS_INFO("MOVING");
     }if(msg.x < -0.05){
-      moveCommand.angular.x = -0.2;
+      moveCommand.angular.z = -0.2;
+    ROS_INFO("MOVING2");
     }if(msg.x <= 0.05 && msg.x >= -0.05){
       moveCommand.linear.x = 0.2;
-    }
-    move_pub.publish(moveCommand); 
     ROS_INFO("MOVING");
+    }
+    move_pub.publish(moveCommand);
   }
 
   /* Callback function for the /scan topic
@@ -55,6 +57,7 @@ public:
 	  moveCommand.angular.x = 0;
 	  moveCommand.angular.y = 0;
 	  moveCommand.angular.z = 0;
+	  ROS_INFO("STOPPING");
 	}
       }
     move_pub.publish(moveCommand);
