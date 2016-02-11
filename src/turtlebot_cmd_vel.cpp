@@ -30,7 +30,7 @@ public:
       moveCommand.angular.x = 0.2;
     }if(msg.x < -0.05){
       moveCommand.angular.x = -0.2;
-    }if(msg.x <= 0.05 && >= -0.05){
+    }if(msg.x <= 0.05 && msg.x >= -0.05){
       moveCommand.linear.x = 0.2;
     }
     move_pub.publish(moveCommand); 
