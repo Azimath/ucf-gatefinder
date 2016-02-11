@@ -23,8 +23,8 @@ ImageConverter::ImageConverter()
 
     cv::namedWindow(OPENCV_WINDOW);
 
-    cvCreateTrackbar("LowH", OPENCV_WINDOW, &iLowH, 255);
-    cvCreateTrackbar("HighH", OPENCV_WINDOW, &iHighH, 255);
+    cvCreateTrackbar("LowH", OPENCV_WINDOW, &iLowH, 179);
+    cvCreateTrackbar("HighH", OPENCV_WINDOW, &iHighH, 179);
 
     cvCreateTrackbar("LowS", OPENCV_WINDOW, &iLowS, 255);
     cvCreateTrackbar("HighS", OPENCV_WINDOW, &iHighS, 255);
