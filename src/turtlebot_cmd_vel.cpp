@@ -26,12 +26,18 @@ public:
   void vectorCb(const geometry_msgs::Vector3& msg)
   {
     geometry_msgs::Twist moveCommand;
-    if(msg.x > 15){
-      moveCommand.angular.z = -1;
+    if(msg.x > 30){
+      moveCommand.angular.z = -0.6;
     ROS_INFO("MOVING");
-    }if(msg.x < -15){
-      moveCommand.angular.z = 1;
+    }if(msg.x < -30){
+      moveCommand.angular.z = 0.6;
     ROS_INFO("MOVING2");
+    }if(msg.x < 30 && msg.x > 15){
+      moveCommand.angular.z = -0.3;
+      moveCommand.linear.x = 0.1;
+    }if(msg.x > -30 && msg.x < -15){
+      moveCommand.angular.z = 0.3;
+      moveCommand.linear.x = 0.1;
     }if(msg.x <= 15 && msg.x >= -15){
       moveCommand.linear.x = 0.2;
     ROS_INFO("MOVING");
