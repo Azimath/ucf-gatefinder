@@ -9,8 +9,8 @@ class TurtlebotCmdVel
 {
   const float maxTurnRate = 1.0;
   const float minTurnRate = -1.0;
-  const float maxDriveSpeed = 0.3;
-  const float minDriveSpeed = 0.0;
+  const float maxMoveSpeed = 0.3;
+  const float minMoveSpeed = 0.0;
   ros::NodeHandle nh_;
   // geometry_msgs::Twist moveCommand;
   sensor_msgs::LaserScan scanData;
