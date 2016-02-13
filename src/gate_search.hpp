@@ -30,4 +30,6 @@ public:
 
     int iLowV = 0;
     int iHighV = 255;
+
+    cv::Mat prevObjectMask;
 };

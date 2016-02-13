@@ -64,12 +64,23 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
     cv::erode(objectMask, objectMask, erodeElement);
     cv::dilate(objectMask, objectMask, dilateElement);
 
+    cv::Mat andMask;
+    if(!prevObjectMask.empty())
+    {
+        cv::bitwise_and(objectMask, prevObjectMask, andMask);
+        prevObjectMask = objectMask;
+    }
+    else
+    {
+        andMask = objectMask;
+    }
+
     cv::Mat nonZeros;
-    cv::Mat drawing = cv::Mat::zeros( objectMask.size(), CV_8UC3 );;
+    cv::Mat drawing = cv::Mat::zeros( andMask.size(), CV_8UC3 );;
 
     try
     {
-        cv::findNonZero(objectMask, nonZeros);
+        cv::findNonZero(andMask, nonZeros);
         cv::Rect bounds = cv::boundingRect(nonZeros);
 
         cv::cvtColor(objectMask, drawing, cv::COLOR_GRAY2RGB);
