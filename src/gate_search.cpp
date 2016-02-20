@@ -75,13 +75,11 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
         andMask = objectMask;
     }
 
-    cv::Mat nonZeros;
     cv::Mat drawing = cv::Mat::zeros( andMask.size(), CV_8UC3 );;
 
-    try
+    if(andMask != 0)
     {
-        cv::findNonZero(andMask, nonZeros);
-        cv::Rect bounds = cv::boundingRect(nonZeros);
+        cv::Rect bounds = cv::boundingRect(andMask);
 
         cv::cvtColor(objectMask, drawing, cv::COLOR_GRAY2RGB);
         cv::rectangle(drawing, bounds, cv::Scalar(255,0,0),1,8,0);
@@ -101,7 +99,7 @@ void ImageConverter::imageCb(const sensor_msgs::ImageConstPtr &msg)
         cv::imshow(OPENCV_WINDOW, drawing); //display the incoming image to the user
         cv::waitKey(3);
     }
-    catch (cv::Exception &e)
+    else
     {
         ROS_INFO("No target found");
     }
